@@ -1,0 +1,46 @@
+-- Create a function to show a custom warning notification for VortexClient
+function Warn.VC(title, text)
+    -- Create a ScreenGui to hold the notification
+    local gui = Instance.new("ScreenGui")
+    gui.Name = "CustomNotification"
+    gui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+    -- Create a Frame to hold the notification text
+    local frame = Instance.new("Frame")
+    frame.Size = UDim2.new(0, 250, 0, 70)
+    frame.Position = UDim2.new(0.5, -125, 1, -80)
+    frame.BackgroundColor3 = Color3.fromRGB(255, 165, 0)  -- Orange color
+    frame.BorderSizePixel = 1
+    frame.Parent = gui
+
+    -- Create a UIStroke for the frame
+    local uiStroke = Instance.new("UIStroke")
+    uiStroke.Parent = frame
+    uiStroke.Transparency = 0  -- Set transparency to 0 for fully visible
+    uiStroke.Color = Color3.fromRGB(255, 165, 0)  -- Orange color
+    uiStroke.Thickness = 4
+
+    -- Create a TextLabel for the notification text
+    local textLabel = Instance.new("TextLabel")
+    textLabel.Size = UDim2.new(1, 0, 1, 0)
+    textLabel.Text = title .. "\n" .. text
+    textLabel.TextColor3 = Color3.new(1, 1, 1)
+    textLabel.Font = Enum.Font.DenkOne
+    textLabel.TextSize = 23
+    textLabel.Parent = frame
+
+    -- Tween the notification for entrance effect
+    frame:TweenPosition(UDim2.new(0.5, -125, 1, -160), "Out", "Back", 0.5)
+
+    -- Wait for a few seconds
+    wait(2)
+
+    -- Tween the notification for exit effect
+    frame:TweenPosition(UDim2.new(0.5, -125, 1, 0), "In", "Back", 0.5)
+
+    -- Wait for the exit animation to complete
+    wait(0.5)
+
+    -- Destroy the notification elements
+    gui:Destroy()
+end
